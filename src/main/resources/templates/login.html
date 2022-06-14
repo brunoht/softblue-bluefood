@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    lang="pt-br"
+    layout:decorate="~{layout}"
+>
+<body>
+    <div class="d-flex align-items-center view-100 text-center" layout:fragment="content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-primary">Autenticação</h4>
+                </div>
+            </div>
+            <div class="row pt-3 pb-3">
+                <div class="col d-flex justify-content-center">
+                    <form action="" class="col-6">
+                        <fieldset>
+                            <input type="email" name="email" placeholder="E-mail" class="form-control" />
+                            <input type="password" name="password" placeholder="Senha" class="form-control" />
+                            <div class="d-grid gap-2 col mx-auto pb-3 pt-2">
+                                <button type="submit" class="btn btn-primary">Entrar</button>
+                            </div>
+                        </fieldset>
+                        <div class="alert alert-danger" role="alert">
+                            Mensagem de erro aqui.
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <span>Criar uma nova conta:</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <a th:href="@{/public/client/new}" type="button" class="btn btn-primary">Cliente</a>
+                            <button type="button" class="btn btn-primary">Restaurante</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

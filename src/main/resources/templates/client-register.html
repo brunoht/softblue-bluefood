@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    lang="pt-br"
+    layout:decorate="~{layout}"
+>
+<body>
+    <div class="container pt-3" layout:fragment="content">
+        <div class="row">
+            <div class="col mb-3">
+                <h3 th:text="${editMode} ? 'Edição de Cliente' : 'Cadastro de Cliente'"></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form method="POST" th:action="${editMode} ? @{/client/save} : @{/public/client/save}" th:object="${client}">
+                    <fieldset>
+                        <input type="hidden" th:field="*{id}" />
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="nameHelp" th:field="*{name}" />
+                            <!-- <div id="nameHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" />
+                            <!-- <div id="emailHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" th:field="*{password}" />
+                            <!-- <div id="passwordHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="cpf" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="cpf" aria-describedby="cpfHelp" th:field="*{cpf}" />
+                            <!-- <div id="cpfHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="phone" aria-describedby="phoneHelp" th:field="*{phone}" />
+                            <!-- <div id="phoneHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="zipCode" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="zipCode" aria-describedby="zipCodeHelp" th:field="*{zipCode}" />
+                            <!-- <div id="zipCodeHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                        </div>
+                        <hr />
+                        <button type="submit" class="btn btn-primary" th:utext="${editMode} ? Alterar : Cadastrar"></button>
+                        <a th:href="@{/}" type="button" class="btn" th:utext="Voltar"></a>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
