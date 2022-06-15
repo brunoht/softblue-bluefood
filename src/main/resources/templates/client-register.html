@@ -10,6 +10,8 @@
         <div class="row">
             <div class="col mb-3">
                 <h3 th:text="${editMode} ? 'Edição de Cliente' : 'Cadastro de Cliente'"></h3>
+                <div class="alert alert-success" role="alert" th:if="${success != null}" th:text="${success}"></div>
+                <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}"></div>
             </div>
         </div>
         <div class="row">
@@ -20,37 +22,52 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Nome Completo</label>
                             <input type="text" class="form-control" id="name" aria-describedby="nameHelp" th:field="*{name}" />
-                            <!-- <div id="nameHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                            <div id="nameHelp" class="form-text text-danger" th:if="${#fields.hasErrors('name')}">
+                                <span th:errors="*{name}"></span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail</label>
                             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" th:field="*{email}" />
-                            <!-- <div id="emailHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                            <div id="emailHelp" class="form-text text-danger" th:if="${#fields.hasErrors('email')}">
+                                <span th:errors="*{email}"></span>
+                            </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" th:if="${!editMode}">
                             <label for="password" class="form-label">Senha</label>
                             <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" th:field="*{password}" />
-                            <!-- <div id="passwordHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                            <div id="passwordHelp" class="form-text text-danger" th:if="${#fields.hasErrors('password')}">
+                                <span th:errors="*{password}"></span>
+                            </div>
                         </div>
+                        <input type="hidden" name="password" value="null" th:if="${editMode}" />
                         <div class="mb-3">
                             <label for="cpf" class="form-label">CPF</label>
                             <input type="text" class="form-control" id="cpf" aria-describedby="cpfHelp" th:field="*{cpf}" />
-                            <!-- <div id="cpfHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                            <div id="cpfHelp" class="form-text text-danger" th:if="${#fields.hasErrors('cpf')}">
+                                <span th:errors="*{cpf}"></span>
+                            </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="phone" class="form-label">Telefone</label>
                             <input type="text" class="form-control" id="phone" aria-describedby="phoneHelp" th:field="*{phone}" />
-                            <!-- <div id="phoneHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                            <div id="phoneHelp" class="form-text text-danger" th:if="${#fields.hasErrors('phone')}">
+                                <span th:errors="*{phone}"></span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="zipCode" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="zipCode" aria-describedby="zipCodeHelp" th:field="*{zipCode}" />
-                            <!-- <div id="zipCodeHelp" class="form-text text-danger">Mensagem de erro aqui.</div> -->
+                            <input type="text" class="form-control" id="zipCode" aria-describedby="zipCodeHelp" th:field="*{zipCode}" onkeydown="return isNumberKey(event)"/>
+                            <div id="zipCodeHelp" class="form-text text-danger" th:if="${#fields.hasErrors('zipCode')}">
+                                <span th:errors="*{zipCode}"></span>
+                            </div>
                         </div>
                         <hr />
-                        <button type="submit" class="btn btn-primary" th:utext="${editMode} ? Alterar : Cadastrar"></button>
-                        <a th:href="@{/}" type="button" class="btn" th:utext="Voltar"></a>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary" th:utext="${editMode} ? Alterar : Cadastrar"></button>
+                            <a th:href="@{/}" type="button" class="btn" th:utext="Voltar"></a>
+                        </div>
                     </fieldset>
                 </form>
             </div>

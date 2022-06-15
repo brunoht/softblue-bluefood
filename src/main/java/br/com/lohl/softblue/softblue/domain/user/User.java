@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import br.com.lohl.softblue.softblue.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,7 +45,11 @@ public class User implements Serializable {
     private String password;
     
     @NotBlank(message = "O telefone não pode ser vazio")
-    @Pattern(regexp = "[0-9] {10,11}", message = "O telefone possui formato inválido")
+    @Pattern(regexp = "[0-9]{10,11}", message = "O telefone possui formato inválido")
     @Column(length = 11, nullable = false)
     private String phone;
+
+    public void encryptPassword() {
+        this.password = StringUtils.encrypt(this.password);
+    }
 }

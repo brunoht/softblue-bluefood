@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.lohl.softblue.softblue.application.ClientService;
+import br.com.lohl.softblue.softblue.application.ValidationException;
 import br.com.lohl.softblue.softblue.domain.client.Client;
 
 @Controller
@@ -36,10 +37,18 @@ public class PublicController {
         Model model
     ) {
         if (errors.hasErrors()) {
-
+            model.addAttribute("error", "Não foi possível salvar o cliente.");
+        } else {
+            try {
+                clientService.saveClient(client);
+                model.addAttribute("success", "Cliente salvo com sucesso.");    
+            } catch (ValidationException e) {
+                errors.rejectValue("email", null, e.getMessage());
+            }
+            
         }
-        HelperController.setEditMode(model, true);
-        clientService.saveClient(client);
+        HelperController.setEditMode(model, false);
+        
         return "client-register";
     }
 }
